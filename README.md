@@ -1,4 +1,4 @@
-# Desenvolvido no masterclass RocketSeat
+# Desenvolvido no Masterclass RocketSeat
 <p>
   Usando Vite + React + Typescript
 </p>
