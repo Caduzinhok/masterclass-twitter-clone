@@ -1,22 +1,32 @@
+import { FormEvent, useState } from "react"
 import { Header } from "../components/Header"
 import { Separator } from "../components/Separator"
 import { Tweet } from "../components/Tweet"
 
 import './Timeline.css'
-
-const tweets = [
-    'Tweet 1',
-    'Tweet 2',
-    'Tweet 3'
-  ]
 export function Timeline () {
+  const [tweets, setTweets] = useState([''])
+  const [newTweet, setNewTweets] = useState('')
+
+  function createNewTweet (event: FormEvent) {
+    event.preventDefault()
+
+    setTweets([...tweets, newTweet])
+    setNewTweets('')
+  }
+
     return (
         <main className='timeline'>
           <Header title="Home"/>
-          <form className='new-tweet-form'>
+          <form onSubmit={createNewTweet} className='new-tweet-form'>
             <label htmlFor="tweet">
               <img src="https://github.com/Caduzinhok.png" alt="Carlos Andrade" />
-              <textarea name="" id="tweet" placeholder="What's happening?"></textarea>
+              <textarea 
+              onChange={(event) => setNewTweets(event.target.value)}
+              value={newTweet}
+              name=""
+              id="tweet"
+              placeholder="What's happening?"></textarea>
             </label>
               <button type='submit'>Tweet</button>
           </form>
@@ -25,7 +35,7 @@ export function Timeline () {
 
           {tweets.map( tweet => {
             return (
-              <Tweet content={tweet} />
+              <Tweet key={tweet} content={tweet} />
             )
           })
           }
